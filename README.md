@@ -7,7 +7,7 @@ The taxicab upadtes its knowledge of the environment regularly. The traffic ligh
 ### Results
 By using alpha and gamma depending on time, a minimum success rate of 98% is obtained. 
 
-# Running the simulation
+### Running the simulation
 In the main directory, enter for Linux systems:
 python smartcab/agent.py
 

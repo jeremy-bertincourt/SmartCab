@@ -32,11 +32,10 @@ class LearningAgent(Agent):
         self.color = 'red'  # override color
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         # Initialize any additional variables here
-	self.timeAlpha = 0.1
 	self.timeEpsilon = 0
 	self.Q_table = defaultdict(dict)
 	self.R_table = defaultdict(dict)
-	self.alpha = 0
+	self.alpha = 0.2
 	self.gamma = 0.5
 	self.epsilon = 1
 
@@ -47,7 +46,6 @@ class LearningAgent(Agent):
 
     def update(self, t):
         
-        self.alpha = alphaTime(self.timeAlpha)
         self.epsilon = epsilonTime(self.timeEpsilon)
          
         # Gather inputs
@@ -96,7 +94,6 @@ class LearningAgent(Agent):
         self.Q_table[current_state][action]=((1-self.alpha) * self.Q_table[current_state][action])+(self.alpha*(self.R_table[next_state][action]+(self.gamma*next_action)))          
         
         # Update time
-	self.timeAlpha += 0.1
 	self.timeEpsilon += 0.05
 	
         print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
@@ -112,7 +109,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0.5, display=True)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.00001, display=False)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials

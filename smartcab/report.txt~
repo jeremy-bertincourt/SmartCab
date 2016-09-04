@@ -1,0 +1,31 @@
+### Report for the smatcab project 
+
+### Implement a Basic Driving Agent
+QUESTION: Observe what you see with the agent's behavior as it takes random actions. Does the smartcab eventually make it to the destination? Are there any other interesting observations to note?
+
+Answer: The agent does not try to reach its destination. It sometimes reaches it by chance but does not try to reach it even when close to the destination. We can observe that the state is not updated : it does not pay attention to the traffic.
+
+### Inform the Driving Agent:
+QUESTION: What states have you identified that are appropriate for modeling the smartcab and environment? Why do you believe each of these states to be appropriate for this problem?
+
+Answer: the states represent the variables the smartcab can perceive. That includes the traffic (traffic light and other cars) which is given by the inputs, the remaining time, and the next waypoint. However, there are too many possible states if we include all those variables. That is why I removed the deadline. The smartcab is still able to reach its destination thanks to the Q-Learning algorithm with a learning rate alpha that depends on time. The smartcab can now explore its environment faster. The other variables such as inputs and next_waypoint should however be kept as they are crucial information to guide the smartcab.
+
+### Implement a Q-Learning Driving Agent
+QUESTION: What changes do you notice in the agent's behavior when compared to the basic driving agent when random actions were always taken? Why is this behavior occurring?
+
+Answer: The agent is able to get nearer the destination and sometimes able to reach the destination. It memorises the reward in order to evaluate the best action to take when assessing the same state again. Therefore, the behavior of the smartcab is improved : it learns over time. 
+
+### Improve the Q-Learning Driving Agent
+QUESTION: Report the different values for the parameters tuned in your basic implementation of Q-Learning. For which set of parameters does the agent perform best? How well does the final driving agent perform?
+
+Answer: The Agent is able to reach the destination most of the time in the alloted time. I have used a value for alpha and epsilon that change over time. That way for alpha, long term rewards are prefered at the beginning of the trip and short term rewards are prefered as times goes on. For epsilon, the smartcab must explore its environment by selecting randoms actions at the beginning. But the probability of selecting random actions must decrease over time as the best actions are known. Gamma should not too close to 1 as it leads to a slow convergence of the algorithm. That is why I chose 0.5, similarly to theoretical courses. The agent can reach the destination in the alloted time with a success rate of 97% for a time step for epsilon of 0.1 and performs a success rate of 99% with a time step of 0.05. That is why the latter parameter is used.
+
+QUESTION: Does your agent get close to finding an optimal policy, i.e. reach the destination in the minimum possible time, and not incur any penalties? How would you describe an optimal policy for this problem?
+
+Answer: In an optimal policy, the smartcab should not get any penalties, which means here that it should respect the traffic rules. This is not always the case here for the first trips and it does not always find the best route to reach the destination. However, it can reach the destination in the alloted time most of the time and the penalties are rare. It performs a success rate of 99% (sometimes 100%) whereas the optimal policy should always give a sucess rate of 100%. Thus the agent is close to the optimal policy.
+
+ 
+
+
+  
+
